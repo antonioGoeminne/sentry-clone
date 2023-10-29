@@ -8,12 +8,12 @@ import {
   primaryLighter,
   secondary,
   secondaryDarker,
-} from "@ui/colors";
+} from "../../ui/colors";
 import styled from "styled-components";
 import { usePathname, useRouter } from "next/navigation";
 
 const menuOptions = [
-  { label: "Milestones", icon: "ri:flag-2-line", link: "/milestones" },
+  { label: "Milestones", icon: "ri:flag-2-line", link: "/ " },
   { label: "Bugs", icon: "ri:error-warning-line", link: "/bugs" },
   { label: "Team", icon: "ri:group-line", link: "/team" },
 ];
@@ -29,6 +29,7 @@ export const Sidebar = () => {
         <Flex $justifyContent="space-between">
           <Flex style={{ gap: 5 }} $justifyContent="space-between">
             <svg
+              data-testid="bug-icon"
               onClick={() => setOpen(!open)}
               xmlns="http://www.w3.org/2000/svg"
               width="1.4em"
@@ -42,6 +43,7 @@ export const Sidebar = () => {
             </svg>
             {open ? (
               <Title
+                data-testid="brand-title"
                 onClick={() => router.push("/")}
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -133,7 +135,7 @@ export const Sidebar = () => {
   );
 };
 
-const Wrapper = styled(motion.div)<{ $open: boolean }>`
+const Wrapper = styled(motion.div)<{ $open: Boolean }>`
   max-width: ${(props) => (props.$open ? "250px" : "100px")};
   position: relative;
   background-color: ${primary};
@@ -147,9 +149,9 @@ const Title = styled(motion.h1)`
 `;
 
 const Flex = styled.div<{
-  $justifyContent?: string;
-  $hover?: boolean;
-  $isActive?: boolean;
+  $justifyContent: String;
+  $hover: Boolean;
+  $isActive: Boolean;
 }>`
   display: flex;
   min-height: 36px;
@@ -177,7 +179,7 @@ const Menu = styled.ul`
   margin-right: 0;
   gap: 20px;
 `;
-const MenuItem = styled(motion.li)<{ $isActive?: boolean }>`
+const MenuItem = styled(motion.li)<{ $isActive: Boolean }>`
   font-size: 1em;
   list-style: none;
   padding: 0.5rem 0.2rem;
@@ -187,7 +189,7 @@ const MenuItem = styled(motion.li)<{ $isActive?: boolean }>`
   }
 `;
 
-const Divider = styled.div<{ $open: boolean }>`
+const Divider = styled.div<{ $open: Boolean }>`
   width: ${(props) => (props.$open ? "100%" : "80%")};
   height: 1px;
   background-color: ${primaryLighter};
