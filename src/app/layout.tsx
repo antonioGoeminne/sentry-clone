@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@features/sidebar";
 import { MiddleTab } from "@features/middle-tab";
+import StyledComponentsRegistry from "../lib/registry";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div style={{ display: "flex" }}>
-          <Sidebar />
-          <MiddleTab />
-        </div>
-        {children}
+        <StyledComponentsRegistry>
+          <div style={{ display: "flex" }}>
+            <Sidebar />
+            <MiddleTab />
+            {children}
+          </div>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
