@@ -136,6 +136,7 @@ export const Sidebar = () => {
 };
 
 const Wrapper = styled(motion.div)<{ $open: Boolean }>`
+  width: 250px;
   max-width: ${(props) => (props.$open ? "250px" : "100px")};
   position: relative;
   background-color: ${primary};
