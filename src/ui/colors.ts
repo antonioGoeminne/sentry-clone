@@ -6,6 +6,7 @@ export const primaryLighter2 = "#f7eef9";
 export const primaryDarker = "#300c34";
 export const secondary = "#ca0c47";
 export const secondaryDarker = "#e81652";
+export const errorColor = '#F65454'
 
 export const lightenRate = 7.5;
 export const darkenRate = 15;

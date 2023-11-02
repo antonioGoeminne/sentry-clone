@@ -17,7 +17,7 @@ export const Modal = ({ open, setOpenModal, trigger, children }: any) => (
 );
 
 const Overlay = styled(Dialog.Overlay)`
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   position: fixed;
   inset: 0;
 `;
@@ -31,7 +31,7 @@ const Content = styled(Dialog.Content)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90vw;
+  width: 40vw;
   max-width: 500px;
   max-height: 85vh;
   padding: 25px;
