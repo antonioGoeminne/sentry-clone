@@ -1,3 +1,4 @@
+import { statusType } from "@features/bugs/types";
 import tinycolor from "tinycolor2";
 
 export const primary = "#38173b";
@@ -6,7 +7,7 @@ export const primaryLighter2 = "#f7eef9";
 export const primaryDarker = "#300c34";
 export const secondary = "#ca0c47";
 export const secondaryDarker = "#e81652";
-export const errorColor = '#F65454'
+export const errorColor = "#F65454";
 
 export const lightenRate = 7.5;
 export const darkenRate = 15;
@@ -26,3 +27,12 @@ export const secondaryLigtherTiny = tinycolor(secondary)
 export const secondaryDarkerTiny = tinycolor(secondary)
   .darken(darkenRate)
   .toHexString();
+
+export const statusColors: statusType = {
+  complete: "#BDD99A",
+  inProgress: "#D9C79A",
+  toFix: "#D8D99A",
+  failed: "#CE99D9",
+};
+
+export const defaultStatusColor = "#A394A6";
