@@ -14,7 +14,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 const menuOptions = [
   { label: "Milestones", icon: "ri:flag-2-line", link: "/milestones" },
-  { label: "Bugs", icon: "ri:error-warning-line", link: "/bugs" },
+  { label: "Bugs", icon: "ri:error-warning-line", link: "/bugs/allProjects" },
   { label: "Team", icon: "ri:group-line", link: "/team" },
 ];
 
