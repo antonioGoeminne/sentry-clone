@@ -11,6 +11,7 @@ export const BugForm = () => {
     .object({
       name: yup.string().min(1).required(),
       status: yup.string().min(1).required(),
+      project: yup.string().min(1).required(),
     })
     .required();
   const {
@@ -25,6 +26,20 @@ export const BugForm = () => {
 
   return (
     <Form.Root onSubmit={handleSubmit((data) => handleData(data))}>
+      <Controller
+        name="project"
+        control={control}
+        render={({ field: { onChange } }) => (
+          <TextField
+            validation={!errors["project"]}
+            placeHolder={"project name"}
+            errorMessage="Project is required"
+            onChange={onChange}
+            label="Project"
+            name="project"
+          />
+        )}
+      />
       <Controller
         name="name"
         control={control}

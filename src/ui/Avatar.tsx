@@ -1,19 +1,24 @@
-'use client'
+"use client";
 import React from "react";
 import * as Av from "@radix-ui/react-avatar";
 import styled from "styled-components";
+import { primary } from "./colors";
 
-export const Avatar = () => {
+interface avatarProps {
+  image: string;
+  alt: string;
+  fallback?: string;
+}
+
+export const Avatar = ({
+  image = "https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80",
+  alt = "Colm Tuite",
+  fallback,
+}: avatarProps) => {
   return (
-    <Root className="AvatarRoot">
-      <Image
-        className="AvatarImage"
-        src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
-        alt="Colm Tuite"
-      />
-      <Fallback className="AvatarFallback" delayMs={600}>
-        CT
-      </Fallback>
+    <Root>
+      <Image src={image} alt={alt} />
+      <Fallback delayMs={600}>{fallback || alt?.at(0)?.toUpperCase()}</Fallback>
     </Root>
   );
 };
@@ -44,8 +49,8 @@ const Fallback = styled(Av.Fallback)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
-  color: var(--violet-11);
+  background-color: ${primary};
+  color: white;
   font-size: 15px;
   line-height: 1;
   font-weight: 500;

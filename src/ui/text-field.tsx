@@ -60,5 +60,5 @@ const Label = styled(Form.Label)`
 `;
 
 const ErrorMessage = styled(Form.Message)`
-color: ${errorColor}
+  color: ${errorColor};
 `;
