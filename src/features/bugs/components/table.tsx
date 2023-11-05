@@ -9,7 +9,7 @@ import { format } from "date-fns";
 import { useState } from "react";
 import styled from "styled-components";
 import { DEFAULT_FORMAT_DATE } from "@config/index";
-import { statusType } from "../types";
+import { statusType } from ". ./types";
 import tinycolor from "tinycolor2";
 import { Avatar } from "@ui/Avatar";
 
@@ -254,7 +254,7 @@ export const Table = () => {
                   ? null
                   : flexRender(
                       header.column.columnDef.header,
-                      header.getContext()
+                      header.getContext(),
                     )}
               </th>
             ))}
@@ -281,7 +281,7 @@ export const Table = () => {
                   ? null
                   : flexRender(
                       header.column.columnDef.footer,
-                      header.getContext()
+                      header.getContext(),
                     )}
               </th>
             ))}
@@ -296,7 +296,6 @@ const StyledTable = styled.table`
   caption-side: top;
   width: 100%;
   border: none;
-
 
   border-collapse: collapse;
   /* border-collapse: separate; */

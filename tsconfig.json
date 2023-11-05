@@ -22,9 +22,15 @@
       "@features*": ["./src/features*"],
       "@ui*": ["./src/ui*"],
       "@hooks*": ["./src/hooks*"],
-      "@config*": ["./src/config*"],
+      "@config*": ["./src/config*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/bugs/[...project]/page.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/bugs/[...project]/page.tsx"
+  ],
   "exclude": ["node_modules"]
 }

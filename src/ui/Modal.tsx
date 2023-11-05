@@ -1,10 +1,22 @@
 "use client";
-import React from "react";
+import { ReactNode } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-export const Modal = ({ open, setOpenModal, trigger, children }: any) => (
+interface modalProps {
+  open: boolean;
+  setOpenModal: () => void;
+  trigger?: ReactNode;
+  children: ReactNode;
+}
+
+export const Modal = ({
+  open,
+  setOpenModal,
+  trigger,
+  children,
+}: modalProps) => (
   <Dialog.Root open={open} onOpenChange={setOpenModal}>
     <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
     <Dialog.Portal>
@@ -25,7 +37,8 @@ const Overlay = styled(Dialog.Overlay)`
 const Content = styled(Dialog.Content)`
   background-color: white;
   border-radius: 6px;
-  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+  box-shadow:
+    hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
     hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
   position: fixed;
   top: 50%;

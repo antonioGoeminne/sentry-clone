@@ -15,7 +15,8 @@ export default function Page() {
         style={{
           display: "flex",
           padding: "1rem 1.1rem",
-          width: "60%",
+          width: "80%",
+          margin: "20px auto",
           height: 100,
           justifyContent: "space-between",
         }}

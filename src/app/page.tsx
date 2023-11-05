@@ -1,11 +1,8 @@
-'use client'
+"use client";
 import styled from "styled-components";
 
 export default function Home() {
-  return (
-    <main>
-    </main>
-  );
+  return <main></main>;
 }
 
 const Title = styled.h1`

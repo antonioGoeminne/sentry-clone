@@ -2,8 +2,12 @@
 import { primaryLighter2 } from "@ui/colors";
 import styled from "styled-components";
 import { Searcher } from "./Searcher";
+import { useParams } from "next/navigation";
 
 export const MiddleTab = () => {
+  const params = useParams();
+  const project = params?.project?.[0] || "allProjects";
+
   return (
     <Wrapper>
       <div
@@ -15,19 +19,19 @@ export const MiddleTab = () => {
       </div>
       <Title>Projects</Title>
       <Menu>
-        <MenuItem>
+        <MenuItem $project={project} $link={"allProjects"}>
           <p>All projects</p>
           <p>34</p>
         </MenuItem>
-        <MenuItem>
+        <MenuItem $project={project} $link={"asd"}>
           <p>All projects</p>
           <p>34</p>
         </MenuItem>
-        <MenuItem>
+        <MenuItem $project={project} $link={"asd"}>
           <p>All projects</p>
           <p>34</p>
         </MenuItem>
-        <MenuItem>
+        <MenuItem $project={project} $link={"asd"}>
           <p>All projects</p>
           <p>34</p>
         </MenuItem>
@@ -58,7 +62,7 @@ const Menu = styled.ul`
   gap: 12px;
 `;
 
-const MenuItem = styled.li`
+const MenuItem = styled.li<{ $link?: String; $project?: String }>`
   display: flex;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
@@ -67,6 +71,8 @@ const MenuItem = styled.li`
   font-size: 0.9rem;
   justify-content: space-between;
   padding: 0.8rem 1rem;
+  background-color: ${(props) =>
+    props.$link === props.$project ? "white" : "inherit"};
   &: hover {
     background-color: white;
   }
