@@ -7,3 +7,5 @@ My goal was simulate a basic issue tracker
 - app ( router of app )
 - features ( components and tests)
 - ui ( themeConfig and common ui used between components)
+- config ( global configurations )
+- hooks ( global hooks )
