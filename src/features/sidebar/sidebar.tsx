@@ -114,7 +114,7 @@ export const Sidebar = () => {
       >
         <Flex
           $isActive={pathname === "/settings"}
-          onClick={() => router.push("settings")}
+          onClick={() => router.push("/settings")}
           $hover
           style={{ gap: 6 }}
         >
@@ -137,6 +137,7 @@ export const Sidebar = () => {
 
 const Wrapper = styled(motion.div)<{ $open: Boolean }>`
   width: 250px;
+  min-width: ${(props) => (props.$open ? "250px" : "100px")};
   max-width: ${(props) => (props.$open ? "250px" : "100px")};
   position: relative;
   background-color: ${primary};
