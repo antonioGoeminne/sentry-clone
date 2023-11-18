@@ -8,6 +8,8 @@ export type statusType =
 export type Bug = {
   name: string;
   status: statusType;
-  created_at: string;
+  created_at?: Date;
+  date?: Date;
   updated_at?: string;
+  project_id?: string;
 };

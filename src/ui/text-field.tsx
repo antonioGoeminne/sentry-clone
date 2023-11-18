@@ -11,8 +11,10 @@ interface textFieldProps {
   onChange?: any;
   defaultValue?: any;
   validation?: any;
+  placeHolder?: string;
   errorMessage?: string;
   value?: any;
+  type?: string;
 }
 
 export const TextField = ({ ...props }: textFieldProps) => {

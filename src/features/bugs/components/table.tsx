@@ -6,7 +6,6 @@ import {
 } from "@tanstack/react-table";
 import { defaultStatusColor, primary, statusColors } from "@ui/colors";
 import { format } from "date-fns";
-import { useState } from "react";
 import styled from "styled-components";
 import { DEFAULT_FORMAT_DATE } from "@config/index";
 import { Bug, statusType } from "../types";
@@ -47,7 +46,6 @@ export const Table = ({ data = [] }: any) => {
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-
   return (
     <StyledTable>
       <thead>

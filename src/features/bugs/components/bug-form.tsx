@@ -5,13 +5,16 @@ import { Controller, useForm } from "react-hook-form";
 import { TextField } from "@ui/text-field";
 import { Button } from "@ui/Button";
 import { secondary } from "@ui/colors";
+import { usePostBug } from "..";
+import { Bug } from "../types";
 
-export const BugForm = () => {
+export const BugForm = ({ toggleModal }) => {
   const schema = yup
     .object({
       name: yup.string().min(1).required(),
       status: yup.string().min(1).required(),
-      project: yup.string().min(1).required(),
+      project_id: yup.string().min(1).required(),
+      date: yup.date(),
     })
     .required();
   const {
@@ -22,16 +25,21 @@ export const BugForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const handleData = (e) => console.log(e);
+  const { mutate } = usePostBug();
+
+  const handleData = async (data: Bug) => {
+    await mutate({ ...data, created_at: new Date() });
+    toggleModal();
+  };
 
   return (
-    <Form.Root onSubmit={handleSubmit((data) => handleData(data))}>
+    <Form.Root onSubmit={handleSubmit((data: Bug) => handleData(data))}>
       <Controller
-        name="project"
+        name="project_id"
         control={control}
         render={({ field: { onChange } }) => (
           <TextField
-            validation={!errors["project"]}
+            validation={!errors["project_id"]}
             placeHolder={"project name"}
             errorMessage="Project is required"
             onChange={onChange}

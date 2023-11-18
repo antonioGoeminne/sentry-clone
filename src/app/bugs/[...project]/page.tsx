@@ -39,7 +39,7 @@ export default function Page() {
           Add Bug
         </Button>
         <Modal open={openAddBug} setOpenModal={toggleVisibility}>
-          <BugForm />
+          <BugForm toggleModal={toggleVisibility} />
         </Modal>
       </div>
       <WrapperTable>
