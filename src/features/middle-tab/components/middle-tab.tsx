@@ -3,10 +3,14 @@ import { primaryLighter2 } from "@ui/colors";
 import styled from "styled-components";
 import { Searcher } from "./Searcher";
 import { useParams } from "next/navigation";
+import { useGetAllProjects } from "../api/use-projects";
+import { Project } from "../types";
+import Link from "next/link";
 
 export const MiddleTab = () => {
   const params = useParams();
-  const project = params?.project?.[0] || "allProjects";
+  const currentParam = params?.project?.[0];
+  const [projects] = useGetAllProjects();
 
   return (
     <Wrapper>
@@ -19,22 +23,22 @@ export const MiddleTab = () => {
       </div>
       <Title>Projects</Title>
       <Menu>
-        <MenuItem $project={project} $link={"allProjects"}>
-          <p>All projects</p>
-          <p>34</p>
-        </MenuItem>
-        <MenuItem $project={project} $link={"asd"}>
-          <p>All projects</p>
-          <p>34</p>
-        </MenuItem>
-        <MenuItem $project={project} $link={"asd"}>
-          <p>All projects</p>
-          <p>34</p>
-        </MenuItem>
-        <MenuItem $project={project} $link={"asd"}>
-          <p>All projects</p>
-          <p>34</p>
-        </MenuItem>
+        <Link href={`/bugs/allProjects`}>
+          <MenuItem $project={"allProjects"} $link={currentParam}>
+            <p>All Projects</p>
+          </MenuItem>
+        </Link>
+        {(projects || []).map((project: Project) => (
+          <Link href={`/bugs/${project.id}`}>
+            <MenuItem
+              $project={project.id}
+              $link={Number(currentParam)}
+              key={project.id}
+            >
+              <p>{project.name}</p>
+            </MenuItem>
+          </Link>
+        ))}
       </Menu>
     </Wrapper>
   );
@@ -43,6 +47,7 @@ export const MiddleTab = () => {
 const Wrapper = styled.div`
   background-color: ${primaryLighter2};
   height: 100vh;
+  min-width: 300px;
   width: 300px;
 `;
 
@@ -62,7 +67,10 @@ const Menu = styled.ul`
   gap: 12px;
 `;
 
-const MenuItem = styled.li<{ $link?: String; $project?: String }>`
+const MenuItem = styled.li<{
+  $link?: Number | String;
+  $project?: Number | String;
+}>`
   display: flex;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import StyledComponentsRegistry from "../lib/registry";
 import { ClerkProvider } from "@clerk/nextjs";
+import { TanstackProvider } from "@providers/tanstack-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,11 +27,13 @@ export default function RootLayout({
         },
       }}
     >
-      <html lang="en">
-        <body className={inter.className}>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        </body>
-      </html>
+      <TanstackProvider>
+        <html lang="en">
+          <body className={inter.className}>
+            <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          </body>
+        </html>
+      </TanstackProvider>
     </ClerkProvider>
   );
 }

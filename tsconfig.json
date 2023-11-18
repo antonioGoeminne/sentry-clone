@@ -22,7 +22,9 @@
       "@features*": ["./src/features*"],
       "@ui*": ["./src/ui*"],
       "@hooks*": ["./src/hooks*"],
-      "@config*": ["./src/config*"]
+      "@config*": ["./src/config*"],
+      "@api*": ["./src/api*"],
+      "@providers*": ["./src/providers*"] 
     }
   },
   "include": [

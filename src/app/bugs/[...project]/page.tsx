@@ -1,13 +1,18 @@
 "use client";
-import { BugForm, Table } from "@features/bugs";
+import { BugForm, Table, useGetBugs } from "@features/bugs";
 import { useToggleVisibility } from "@hooks/use-toggle-visibility";
 import { Button } from "@ui/Button";
 import { Modal } from "@ui/Modal";
 import { primary, secondary } from "@ui/colors";
+import { useParams } from "next/navigation";
 import styled from "styled-components";
 
 export default function Page() {
   const [openAddBug, toggleVisibility] = useToggleVisibility();
+  const params = useParams();
+  const project_id = params?.project?.[0];
+
+  const [bugs] = useGetBugs(project_id);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
@@ -38,7 +43,7 @@ export default function Page() {
         </Modal>
       </div>
       <WrapperTable>
-        <Table />
+        <Table data={bugs} />
       </WrapperTable>
     </div>
   );
@@ -50,7 +55,8 @@ const Title = styled.h2`
 
 const WrapperTable = styled.div`
   height: 750px;
-  margin: 20px auto;
+  padding-left: 20px;
+  margin: 20px 0 auto;
   width: 80%;
   position: relative;
   overflow-y: auto;

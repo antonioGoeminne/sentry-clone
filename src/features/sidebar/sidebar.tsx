@@ -13,8 +13,8 @@ import styled from "styled-components";
 import { usePathname, useRouter } from "next/navigation";
 
 const menuOptions = [
-  { label: "Milestones", icon: "ri:flag-2-line", link: "/milestones" },
   { label: "Bugs", icon: "ri:error-warning-line", link: "/bugs/allProjects" },
+  { label: "Milestones", icon: "ri:flag-2-line", link: "/milestones" },
   { label: "Team", icon: "ri:group-line", link: "/team" },
 ];
 
@@ -71,7 +71,9 @@ export const Sidebar = () => {
       </div>
       <Menu>
         {menuOptions.map((option, index) => {
-          const isActive = option.link === pathname;
+          const isActive =
+            option.link.includes(pathname?.split("/")?.at(1)) &&
+            pathname !== "/";
           return (
             <Flex
               $isActive={isActive}

@@ -9,202 +9,13 @@ import { format } from "date-fns";
 import { useState } from "react";
 import styled from "styled-components";
 import { DEFAULT_FORMAT_DATE } from "@config/index";
-import { statusType } from ". ./types";
+import { Bug, statusType } from "../types";
 import tinycolor from "tinycolor2";
-import { Avatar } from "@ui/Avatar";
 
-type Person = {
-  bug: string;
-  status: statusType;
-  created: string;
-  reporter: string;
-};
-const defaultData: Person[] = [
-  {
-    bug: "tanner",
-    status: "complete",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "failed",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "other",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "inProgress",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "toFix",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "complete",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "failed",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "other",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "inProgress",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "toFix",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "complete",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "failed",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "other",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "inProgress",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "toFix",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "complete",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "failed",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "other",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "inProgress",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "toFix",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "complete",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "failed",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "other",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "inProgress",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "toFix",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "complete",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "failed",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "other",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "inProgress",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-  {
-    bug: "tanner",
-    status: "toFix",
-    created: "2023-10-23 17:05:06.000",
-    reporter: "In Relationship",
-  },
-];
-const columnHelper = createColumnHelper<Person>();
+const columnHelper = createColumnHelper<Bug>();
 
 const columns = [
-  columnHelper.accessor("bug", {
+  columnHelper.accessor("name", {
     cell: (info) => (
       <p style={{ fontWeight: "bold", fontSize: ".9rem" }}>
         {" "}
@@ -222,21 +33,15 @@ const columns = [
     ),
     header: () => <span style={{ textAlign: "center" }}>STATUS</span>,
   }),
-  columnHelper.accessor("created", {
+  columnHelper.accessor("created_at", {
     header: () => "created",
     cell: (info) => (
       <span>{format(new Date(info.getValue()), DEFAULT_FORMAT_DATE)}</span>
     ),
   }),
-  columnHelper.accessor("reporter", {
-    header: () => <span>REPORTER</span>,
-    cell: () => <Avatar />,
-  }),
 ];
 
-export const Table = () => {
-  const [data, setData] = useState(() => [...defaultData]);
-
+export const Table = ({ data = [] }: any) => {
   const table = useReactTable({
     data,
     columns,
@@ -254,7 +59,7 @@ export const Table = () => {
                   ? null
                   : flexRender(
                       header.column.columnDef.header,
-                      header.getContext(),
+                      header.getContext()
                     )}
               </th>
             ))}
@@ -281,7 +86,7 @@ export const Table = () => {
                   ? null
                   : flexRender(
                       header.column.columnDef.footer,
-                      header.getContext(),
+                      header.getContext()
                     )}
               </th>
             ))}
