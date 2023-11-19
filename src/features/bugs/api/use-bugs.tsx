@@ -1,6 +1,7 @@
 import { axios } from "@api/axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Bug } from "../types";
+import omit from "just-omit";
 
 const useGetBugs = (project_id: string) => {
   const query = useQuery({
@@ -21,7 +22,7 @@ const usePostBug = () => {
 
   const mutation = useMutation({
     mutationFn: async (newData) => {
-      return axios.post("/bugs", newData);
+      return axios.post("/bugs", omit(newData, ["project_name"]));
     },
     onMutate: async (data: Bug) => {
       await queryClient.cancelQueries({
@@ -36,7 +37,7 @@ const usePostBug = () => {
       // Optimistically update to the new value
       queryClient.setQueryData(["bugs", data.project_id], (prev: Bug[]) => [
         ...prev,
-        { ...data },
+        { ...omit(data, ["project_name"]) },
       ]);
 
       // Return a context object with the snapshotted value

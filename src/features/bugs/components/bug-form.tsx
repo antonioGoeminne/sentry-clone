@@ -7,23 +7,31 @@ import { Button } from "@ui/Button";
 import { secondary } from "@ui/colors";
 import { usePostBug } from "..";
 import { Bug } from "../types";
+import { Autocomplete } from "@ui/Autocomplete";
+import { useGetProjectsByText } from "@features/projects/api/use-projects";
+import { Project } from "@features/projects/types";
+import { DEFAULT_BUGS_STATUS } from "@config/index";
 
-export const BugForm = ({ toggleModal }) => {
+export const BugForm = ({ toggleModal }: any) => {
   const schema = yup
     .object({
       name: yup.string().min(1).required(),
       status: yup.string().min(1).required(),
       project_id: yup.string().min(1).required(),
+      project_name: yup.string().min(1).required(),
       date: yup.date(),
     })
     .required();
   const {
     handleSubmit,
     control,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const [projectsData] = useGetProjectsByText(watch("project_name"));
 
   const { mutate } = usePostBug();
 
@@ -32,19 +40,24 @@ export const BugForm = ({ toggleModal }) => {
     toggleModal();
   };
 
+  const handleSelectProjectId = (project: Project) => {
+    setValue("project_id", project.id);
+  };
+
+  const handleSelectStatus = (status: string) => {
+    setValue("status", status);
+  };
+
   return (
     <Form.Root onSubmit={handleSubmit((data: Bug) => handleData(data))}>
       <Controller
-        name="project_id"
+        name="project_name"
         control={control}
         render={({ field: { onChange } }) => (
-          <TextField
-            validation={!errors["project_id"]}
-            placeHolder={"project name"}
-            errorMessage="Project is required"
-            onChange={onChange}
-            label="Project"
-            name="project"
+          <Autocomplete
+            data={projectsData}
+            setInputValue={onChange}
+            handleSelectItem={handleSelectProjectId}
           />
         )}
       />
@@ -66,13 +79,10 @@ export const BugForm = ({ toggleModal }) => {
         name="status"
         control={control}
         render={({ field: { onChange } }) => (
-          <TextField
-            validation={!errors["status"]}
-            placeHolder={"Todo.."}
-            errorMessage="status is required"
-            onChange={onChange}
-            label="Status"
-            name="status"
+          <Autocomplete
+            data={DEFAULT_BUGS_STATUS}
+            setInputValue={onChange}
+            handleSelectItem={handleSelectStatus}
           />
         )}
       />

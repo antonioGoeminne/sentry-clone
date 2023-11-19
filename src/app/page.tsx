@@ -1,5 +1,5 @@
 "use client";
-import { MiddleTab } from "@features/middle-tab";
+import { MiddleTab } from "@features/projects";
 import { Sidebar } from "@features/sidebar";
 import styled from "styled-components";
 

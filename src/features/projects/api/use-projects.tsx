@@ -14,3 +14,20 @@ export const useGetAllProjects = () => {
   });
   return [query?.data, query.isLoading];
 };
+
+export const useGetProjectsByText = (text: string) => {
+  const query = useQuery({
+    queryKey: ["projects", text],
+    queryFn: async ({ signal }: any) => {
+      const { data } = await axios.get("/projects", {
+        params: {
+          text,
+        },
+        signal,
+      });
+
+      return data;
+    },
+  });
+  return [query?.data, query.isLoading];
+};
